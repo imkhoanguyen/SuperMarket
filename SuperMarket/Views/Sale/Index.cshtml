@@ -1,0 +1,37 @@
+﻿@model SaleViewModel
+<div class="row">
+    <div class="col-7">
+        <h3>Cashier's Console</h3>
+    </div>
+    <div class="col-2">
+        <label for="cashier">Cashier Name: </label>
+    </div>
+    <div class="col-3">
+        @*Display cashier name here*@
+    </div>
+</div>
+<hr />
+<br />
+<div class="row">
+    <div class="col-4">
+        <select class="form-control" asp-for="SelectedCategoryId">
+            <option>- Please Select -</option>
+            @foreach (var cat in Model.Categories)
+            {
+                <option value="@cat.CategoryId">@cat.Name</option>
+            }
+        </select>
+    </div>
+    <br />
+    <div>
+        @*Product List*@
+    </div>
+    <br />
+    <div>
+        @*Product Detail*@
+    </div>
+    @*Sale form*@
+    <div class="col">
+        @*List of transactions*@
+    </div>
+</div>

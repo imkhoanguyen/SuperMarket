@@ -28,7 +28,7 @@
                         }
                     });
                 }
-                return _products??new List<Product>();
+                return _products ?? new List<Product>();
             }
         }
         public static void AddProduct(Product Product)
@@ -79,6 +79,17 @@
                 ProductToUpdate.Price = Product.Price;
                 ProductToUpdate.Quantity = Product.Quantity;
             }
+        }
+
+        public static List<Product>? GetProductsByCategory(int CategoryId)
+        {
+            var products = _products.Where(x => x.CategoryId == CategoryId);
+            if (products != null)
+            {
+                return products.ToList();
+            }
+            else return null;
+
         }
     }
 }
