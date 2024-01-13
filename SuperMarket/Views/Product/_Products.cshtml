@@ -11,7 +11,7 @@
         <tbody>
             @foreach(var product in Model)
             {
-                <tr>
+                <tr class="product-row" product-id="@product.ProductId">    
                     <td>
                         @product.Name
                     </td>

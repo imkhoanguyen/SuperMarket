@@ -25,7 +25,7 @@ namespace SuperMarket.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel productViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 ProductsRepository.AddProduct(productViewModel.Product);
                 return RedirectToAction(nameof(Index));
@@ -47,7 +47,7 @@ namespace SuperMarket.Controllers
         [HttpPost]
         public IActionResult Edit(ProductViewModel productViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 ProductsRepository.UpdateProduct(productViewModel.Product.ProductId, productViewModel.Product);
                 return RedirectToAction(nameof(Index));
@@ -66,5 +66,7 @@ namespace SuperMarket.Controllers
             var products = ProductsRepository.GetProductsByCategory(categoryId);
             return PartialView("_Products", products);
         }
+
+        
     }
 }

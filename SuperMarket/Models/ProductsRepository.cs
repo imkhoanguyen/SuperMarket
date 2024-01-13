@@ -81,9 +81,9 @@
             }
         }
 
-        public static List<Product>? GetProductsByCategory(int CategoryId)
+        public static List<Product>? GetProductsByCategory(int categoryId)
         {
-            var products = _products.Where(x => x.CategoryId == CategoryId);
+            var products = _products.Where(x => x.CategoryId == categoryId);
             if (products != null)
             {
                 return products.ToList();
