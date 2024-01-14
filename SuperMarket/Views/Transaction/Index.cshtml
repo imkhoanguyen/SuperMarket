@@ -2,11 +2,12 @@
 
 <h3 class="text-primary">Transaction Report</h3>
 <hr />
+
 <form method="post" asp-controller="transaction" asp-action="search">
     <div class="row">
         <div class="col-2">
             <label asp-for="CashierName"></label>
-            <input type="text" class="form-control" asp-for="CashierName"/>
+            <input type="text" class="form-control" asp-for="CashierName" />
         </div>
         <div class="col-3">
             <label asp-for="StartDate"></label>
@@ -20,11 +21,14 @@
             <label> &nbsp;</label>
             <button type="submit" class="btn btn-primary form-control">Search</button>
         </div>
-        <div class="col-2"></div>
+        <div class="col-2">
+            <label> &nbsp;</label>
+            <button id="print" type="button" class="btn btn-primary form-control">Print</button>
+        </div>
     </div>
 </form>
 <br />
-@if(Model.Transactions != null)
+@if (Model.Transactions != null)
 {
     <table class="table">
         <thead>
@@ -40,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var tran in Model.Transactions)
+            @foreach (var tran in Model.Transactions)
             {
                 <tr>
                     <td>@tran.TimeStamp.ToString("yyyy-MM-dd hh:mm")</td>
@@ -62,10 +66,21 @@
                 </td>
                 <td style="text-align:right">
                     <b>
-                        @string.Format("{0:c}", Model.Transactions.Sum(x =>x.Price * x.SoldQty))
+                        @string.Format("{0:c}", Model.Transactions.Sum(x => x.Price * x.SoldQty))
                     </b>
                 </td>
             </tr>
         </tfoot>
     </table>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#print").on("click", function () {
+                window.print();
+            });
+        });
+
+    </script>
 }
