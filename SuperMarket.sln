@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBusiness", "CoreBusines
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases", "UseCases\UseCases.csproj", "{038CF2F1-9D83-447A-A107-A0CF37B19AA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{F2D2EE93-1510-438C-BBFC-83C7396C7697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.DataStore.InMemory", "Plugins\Plugins.DataStore.InMemory\Plugins.DataStore.InMemory.csproj", "{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{038CF2F1-9D83-447A-A107-A0CF37B19AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{038CF2F1-9D83-447A-A107-A0CF37B19AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{038CF2F1-9D83-447A-A107-A0CF37B19AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB} = {F2D2EE93-1510-438C-BBFC-83C7396C7697}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7AE2706D-6663-4C6C-9FE7-8AABB975C55A}
