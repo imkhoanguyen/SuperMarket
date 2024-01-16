@@ -1,19 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreBusiness;
+using Microsoft.AspNetCore.Mvc;
 using SuperMarket.Models;
+using UseCases.Interfaces;
 
 namespace SuperMarket.Controllers
 {
     public class CategoriesController : Controller
     {
+        private readonly IViewCategoriesUseCase viewCategoriesUseCase;
+        private readonly IViewSelectedCategoryUseCase viewSelectedCategoryUseCase;
+        private readonly IAddCategoryUseCase addCategoryUseCase;
+        private readonly IEditCategoryUseCase editCategoryUseCase;
+        private readonly IDeleteCategoryUseCase deleteCategoryUseCase;
+
+        public CategoriesController(IViewCategoriesUseCase viewCategoriesUseCase,
+            IViewSelectedCategoryUseCase viewSelectedCategoryUseCase,
+            IAddCategoryUseCase addCategoryUseCase,
+            IEditCategoryUseCase editCategoryUseCase,
+            IDeleteCategoryUseCase deleteCategoryUseCase)
+        {
+            this.viewCategoriesUseCase = viewCategoriesUseCase;
+            this.viewSelectedCategoryUseCase = viewSelectedCategoryUseCase;
+            this.addCategoryUseCase = addCategoryUseCase;
+            this.editCategoryUseCase = editCategoryUseCase;
+            this.deleteCategoryUseCase = deleteCategoryUseCase;
+        }
         public IActionResult Index()
         {
-            List<Category> categories = CategoriesRepository.GetCategories();
+            IEnumerable<Category> categories = viewCategoriesUseCase.Execute();
             return View(categories);
         }
 
         public IActionResult Edit(int? id)
         {
-            var category = CategoriesRepository.GetById(id.HasValue ? id.Value : 0);
+            var category = viewSelectedCategoryUseCase.Execute(id.HasValue ? id.Value : 0);
             return View(category);
         }
 
@@ -22,7 +42,7 @@ namespace SuperMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                CategoriesRepository.UpdateCategory(category.CategoryId, category);
+                editCategoryUseCase.Execute(category.CategoryId, category);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -39,7 +59,7 @@ namespace SuperMarket.Controllers
         {
             if(ModelState.IsValid)
             {
-                CategoriesRepository.AddCategory(category);
+                addCategoryUseCase.Execute(category);
                 return RedirectToAction(nameof(Index));
 
             }
@@ -48,7 +68,7 @@ namespace SuperMarket.Controllers
 
         public IActionResult Delete(int categoryId)
         {
-            CategoriesRepository.DeleteCategory(categoryId);
+            deleteCategoryUseCase.Execute(categoryId);
             return RedirectToAction(nameof(Index));
         }
     }

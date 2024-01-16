@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.Interfaces;
 
 namespace UseCases.CategoriesUseCases
 {
-    public class DeleteCategoryUseCase
+    public class DeleteCategoryUseCase : IDeleteCategoryUseCase
     {
         private readonly ICategoryRepository categoryRepository;
 

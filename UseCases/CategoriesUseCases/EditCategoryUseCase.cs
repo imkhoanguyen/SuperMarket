@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.Interfaces;
 
 namespace UseCases.CategoriesUseCases
 {
-    public class EditCategoryUseCase
+    public class EditCategoryUseCase : IEditCategoryUseCase
     {
         private readonly ICategoryRepository categoryRepository;
 
@@ -19,7 +20,7 @@ namespace UseCases.CategoriesUseCases
 
         public void Execute(int categoryId, Category category)
         {
-            categoryRepository.UpdateCategory(categoryId,category);
+            categoryRepository.UpdateCategory(categoryId, category);
         }
     }
 }

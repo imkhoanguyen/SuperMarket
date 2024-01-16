@@ -1,4 +1,6 @@
-﻿namespace SuperMarket.Models
+﻿using CoreBusiness;
+
+namespace SuperMarket.Models
 {
     public static class CategoriesRepository
     {

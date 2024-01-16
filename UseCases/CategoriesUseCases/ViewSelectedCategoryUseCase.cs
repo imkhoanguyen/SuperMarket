@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.Interfaces;
 
 namespace UseCases.CategoriesUseCases
 {
-    public class ViewSelectedCategoryUseCase
+    public class ViewSelectedCategoryUseCase : IViewSelectedCategoryUseCase
     {
         private readonly ICategoryRepository categoryRepository;
 
