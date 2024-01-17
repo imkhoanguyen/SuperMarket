@@ -1,4 +1,4 @@
-namespace SuperMarket.Models
+namespace CoreBusiness
 {
     public class ErrorViewModel
     {

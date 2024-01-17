@@ -1,5 +1,5 @@
+using CoreBusiness;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarket.Models;
 using System.Diagnostics;
 
 namespace SuperMarket.Controllers

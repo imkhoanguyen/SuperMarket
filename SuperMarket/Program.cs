@@ -2,6 +2,8 @@ using Plugins.DataStore.InMemory;
 using UseCases.CategoriesUseCases;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.Interfaces;
+using UseCases.ProductsUseCases;
+using UseCases.TransactionUseCase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,21 +12,26 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<ICategoryRepository, CategoriesInMemoryRepository>();
 builder.Services.AddSingleton<IProductRepository, ProductsInMemoryRepository>();
+builder.Services.AddSingleton<ITransactionRepository, TransactionsInMemoryRepository>();
 
 
-//category
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
 builder.Services.AddTransient<IViewSelectedCategoryUseCase, ViewSelectedCategoryUseCase>();
-builder.Services.AddTransient<IAddCategoryUseCase, AddCategoryUseCase>();
 builder.Services.AddTransient<IEditCategoryUseCase, EditCategoryUseCase>();
+builder.Services.AddTransient<IAddCategoryUseCase, AddCategoryUseCase>();
 builder.Services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
 
-//product
-builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
-builder.Services.AddTransient<IViewSelectedCategoryUseCase, ViewSelectedCategoryUseCase>();
-builder.Services.AddTransient<IAddCategoryUseCase, AddCategoryUseCase>();
-builder.Services.AddTransient<IEditCategoryUseCase, EditCategoryUseCase>();
-builder.Services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
+builder.Services.AddTransient<IViewProductUseCase, ViewProductUseCase>();
+builder.Services.AddTransient<IAddProductUseCase, AddProductUseCase>();
+builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
+builder.Services.AddTransient<IViewProductsInCategoryUseCase, ViewProductsInCategoryUseCase>();
+builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
+builder.Services.AddTransient<IViewSelectedProductUseCase, ViewSelectedProductUseCase>();
+builder.Services.AddTransient<ISellProductUseCase, SellProductUseCase>();
+
+builder.Services.AddTransient<IRecordTransactionUseCase, RecordTransactionUseCase>();
+builder.Services.AddTransient<IGetToDayTransactionUseCase, GetToDayTransactionUseCase>();
+builder.Services.AddTransient<ISearchTransactionUseCase, SearchTransactionUseCase>();
 
 var app = builder.Build();
 
