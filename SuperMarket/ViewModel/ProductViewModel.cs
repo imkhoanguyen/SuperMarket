@@ -1,4 +1,5 @@
-﻿using SuperMarket.Models;
+﻿
+using CoreBusiness;
 
 namespace SuperMarket.ViewModel
 {

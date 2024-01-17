@@ -1,49 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SuperMarket.Models;
 using SuperMarket.ViewModel;
+using UseCases.Interfaces;
+using UseCases.ProductsUseCases;
 
 namespace SuperMarket.Controllers
 {
     public class SaleController : Controller
     {
+        private readonly IViewCategoriesUseCase viewCategoriesUseCase;
+        private readonly IViewSelectedProductUseCase viewSelectedProductUseCase;
+        private readonly ISellProductUseCase sellProductUseCase;
+
+        public SaleController(IViewCategoriesUseCase viewCategoriesUseCase,
+            IViewSelectedProductUseCase viewSelectedProductUseCase,
+            ISellProductUseCase sellProductUseCase)
+        {
+            this.viewCategoriesUseCase = viewCategoriesUseCase;
+            this.viewSelectedProductUseCase = viewSelectedProductUseCase;
+            this.sellProductUseCase = sellProductUseCase;
+        }
         public IActionResult Index()
         {
             var saleViewModel = new SaleViewModel
             {
-                Categories = CategoriesRepository.GetCategories()
+                Categories = viewCategoriesUseCase.Execute()
             };
             return View(saleViewModel);
         }
 
-        public IActionResult SellProduct(int id)
+        public IActionResult SellProductPartial(int productId)
         {
-            var product = ProductsRepository.GetById(id);
+            var product = viewSelectedProductUseCase.Execute(productId);
             return PartialView("_SellProduct", product);
         }
 
-        public IActionResult Sell(SaleViewModel saleViewModel)
+        public IActionResult Sell(SaleViewModel salesViewModel)
         {
             if (ModelState.IsValid)
             {
-                var prod = ProductsRepository.GetById(saleViewModel.SelectedProductId);
-                if (prod != null)
-                {
-                    TransactionRepository.AddTransaction(
-                        "Cashier1",
-                        saleViewModel.SelectedProductId,
-                        prod.Name,
-                        prod.Price.HasValue ? prod.Price.Value : 0,
-                        prod.Quantity.HasValue ? prod.Quantity.Value : 0,
-                        saleViewModel.QuantityToSell);
-                    prod.Quantity -= saleViewModel.QuantityToSell;
-                    ProductsRepository.UpdateProduct(saleViewModel.SelectedProductId, prod);
-                }
+                // Sell the product
+                sellProductUseCase.Execute(
+                    "cashier1",
+                    salesViewModel.SelectedProductId,
+                    salesViewModel.QuantityToSell);
             }
-            var product = ProductsRepository.GetById(saleViewModel.SelectedProductId);
-            saleViewModel.SelectedCategoryId = (product?.CategoryId == null) ? 0 : product.CategoryId.Value;
-            saleViewModel.Categories = CategoriesRepository.GetCategories();
 
-            return View("Index", saleViewModel);
+            var product = viewSelectedProductUseCase.Execute(salesViewModel.SelectedProductId);
+            salesViewModel.SelectedCategoryId = (product?.CategoryId == null) ? 0 : product.CategoryId.Value;
+            salesViewModel.Categories = viewCategoriesUseCase.Execute();
+
+            return View("Index", salesViewModel);
+        }
+
+        public IActionResult SellProduct(int productId)
+        {
+            var product = viewSelectedProductUseCase.Execute(productId);
+            return PartialView("_SellProduct", product);
         }
     }
 }

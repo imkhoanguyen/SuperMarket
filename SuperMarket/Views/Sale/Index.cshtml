@@ -56,6 +56,7 @@
 
 @section Scripts {
     <script>
+
         $(function () {
             // Initialize the form
             $("#formSale").hide();
@@ -67,6 +68,7 @@
             if (selectedCategoryId > 0) {
                 loadProducts(selectedCategoryId);
             }
+
 
             // Handle category selection
             $("#SelectedCategoryId").on("change", function () {
@@ -83,7 +85,7 @@
                 var productId = $(this).attr("product-id");
 
                 // load product detail
-                $("#productDetail").load("/sale/SellProduct", { id: productId });
+                $("#productDetail").load("/sale/SellProduct", { productId: productId });
 
                 if (productId > 0) {
                     $("#SelectedProductId").val(productId);

@@ -1,4 +1,4 @@
-﻿using SuperMarket.Models;
+﻿using CoreBusiness;
 using System.ComponentModel.DataAnnotations;
 
 namespace SuperMarket.ViewModel

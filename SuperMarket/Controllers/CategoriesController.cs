@@ -1,6 +1,5 @@
 ﻿using CoreBusiness;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarket.Models;
 using UseCases.Interfaces;
 
 namespace SuperMarket.Controllers

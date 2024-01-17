@@ -1,5 +1,5 @@
-﻿using SuperMarket.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using UseCases.Interfaces;
 
 namespace SuperMarket.ViewModel.Validations
 {
@@ -16,12 +16,18 @@ namespace SuperMarket.ViewModel.Validations
                 }
                 else
                 {
-                    var product = ProductsRepository.GetById(saleViewModel.SelectedProductId);
-                    if (product != null)
+                    var getProductByIdUseCase = validationContext.GetService(typeof(IViewSelectedProductUseCase)) as IViewSelectedProductUseCase;
+                    if (getProductByIdUseCase != null)
                     {
-                        if(product.Quantity < saleViewModel.QuantityToSell)
+                        var product = getProductByIdUseCase.Execute(saleViewModel.SelectedProductId);
+                        if (product != null)
                         {
-                            return new ValidationResult($"{product.Name} only has {product.Quantity} left.");
+                            if (product.Quantity < saleViewModel.QuantityToSell)
+                                return new ValidationResult($"{product.Name} only has {product.Quantity} left. It is not enough.");
+                        }
+                        else
+                        {
+                            return new ValidationResult("The selected product doesn't exist.");
                         }
                     }
                 }

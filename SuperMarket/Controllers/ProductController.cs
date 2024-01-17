@@ -76,7 +76,7 @@ namespace SuperMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                editProductUseCase.Execute(productViewModel.Product.ProductId, productViewModel.Product);
+                editProductUseCase.Execute(productViewModel.Product);
                 return RedirectToAction(nameof(Index));
             }
             return View(productViewModel);

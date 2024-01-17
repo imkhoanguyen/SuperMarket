@@ -1,22 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SuperMarket.Models;
 using SuperMarket.ViewModel;
+using UseCases.TransactionUseCase;
 
 namespace SuperMarket.Controllers
 {
     public class TransactionController : Controller
     {
+        private readonly ISearchTransactionUseCase searchTransactionsUseCase;
+
+        public TransactionController(ISearchTransactionUseCase searchTransactionsUseCase)
+        {
+            this.searchTransactionsUseCase = searchTransactionsUseCase;
+        }
         public IActionResult Index()
         {
             TransactionViewModel transactionViewModel = new TransactionViewModel();
             return View(transactionViewModel);
         }
 
-        public IActionResult Search(TransactionViewModel transactionViewModel)
+        public IActionResult Search(TransactionViewModel transactionsViewModel)
         {
-            var transactions = TransactionRepository.Search(transactionViewModel.CashierName??string.Empty, transactionViewModel.StartDate, transactionViewModel.EndDate);
-            transactionViewModel.Transactions = transactions;
-            return View("Index", transactionViewModel);
+            var transactions = searchTransactionsUseCase.Execute(
+                 transactionsViewModel.CashierName ?? string.Empty,
+                 transactionsViewModel.StartDate,
+                 transactionsViewModel.EndDate);
+
+            transactionsViewModel.Transactions = transactions;
+
+            return View("Index", transactionsViewModel);
         }
     }
 }

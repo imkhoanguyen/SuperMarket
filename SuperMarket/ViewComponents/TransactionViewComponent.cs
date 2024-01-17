@@ -1,13 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SuperMarket.Models;
+using UseCases.TransactionUseCase;
 
 namespace SuperMarket.ViewComponents
 {
     public class TransactionViewComponent : ViewComponent
     {
+        private readonly IGetToDayTransactionUseCase getToDayTransactionUseCase;
+
+        public TransactionViewComponent(IGetToDayTransactionUseCase getToDayTransactionUseCase)
+        {
+            this.getToDayTransactionUseCase = getToDayTransactionUseCase;
+        }
         public IViewComponentResult Invoke(string userName)
         {
-            var transaction = TransactionRepository.GetByDayAndCashier(userName, DateTime.Now);
+            var transaction = getToDayTransactionUseCase.Execute(userName);
             return View(transaction);
         }
     }
