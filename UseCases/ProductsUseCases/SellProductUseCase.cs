@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.Interfaces;
 using UseCases.TransactionUseCase;
 
 namespace UseCases.ProductsUseCases
 {
-    public class SellProductUseCase
+    public class SellProductUseCase : ISellProductUseCase
     {
         private readonly IProductRepository productRepository;
         private readonly IRecordTransactionUseCase recordTransactionUseCase;
