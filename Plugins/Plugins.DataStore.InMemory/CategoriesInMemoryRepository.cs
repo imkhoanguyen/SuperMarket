@@ -12,9 +12,9 @@ namespace Plugins.DataStore.InMemory
     {
         private  List<Category> _categories = new List<Category>()
         {
-            new Category {CategoryId = 1, Name = "Rau", Description = "Xanh"},
-            new Category {CategoryId = 2, Name = "Trai Cay", Description = "Ve sinh"},
-            new Category {CategoryId = 3, Name = "Thit/Ca", Description = "Tuoi"}
+            new Category { CategoryId = 1, Name = "Beverage", Description = "Beverage" },
+            new Category { CategoryId = 2, Name = "Bakery", Description = "Bakery" },
+            new Category { CategoryId = 3, Name = "Meat", Description = "Meat" }
         };
         public IEnumerable<Category> GetCategories() => _categories;
 
