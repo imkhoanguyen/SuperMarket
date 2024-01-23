@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{F2D2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins.DataStore.InMemory", "Plugins\Plugins.DataStore.InMemory\Plugins.DataStore.InMemory.csproj", "{CEFD75E1-4437-43DB-85CB-8AF2ED14C3FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Datastore,SQL", "Plugins\Plugins.Datastore,SQL\Plugins.Datastore,SQL.csproj", "{530B6AD0-8BF5-47EB-B65E-46BB57AF3E22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins.Datastore.SQL", "Plugins\Plugins.Datastore,SQL\Plugins.Datastore.SQL.csproj", "{530B6AD0-8BF5-47EB-B65E-46BB57AF3E22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

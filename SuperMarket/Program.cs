@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Plugins.DataStore.InMemory;
+using Plugins.Datastore.SQL;
 using UseCases.CategoriesUseCases;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.Interfaces;
@@ -6,6 +9,11 @@ using UseCases.ProductsUseCases;
 using UseCases.TransactionUseCase;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<MakeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MarketManagement"));
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
