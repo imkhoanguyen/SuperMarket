@@ -7,6 +7,7 @@ using UseCases.DataStorePluginInterfaces;
 using UseCases.Interfaces;
 using UseCases.ProductsUseCases;
 using UseCases.TransactionUseCase;
+using Plugins.Datastore_SQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,20 @@ builder.Services.AddDbContext<MakeContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<ICategoryRepository, CategoriesInMemoryRepository>();
-builder.Services.AddSingleton<IProductRepository, ProductsInMemoryRepository>();
-builder.Services.AddSingleton<ITransactionRepository, TransactionsInMemoryRepository>();
+if (builder.Environment.IsEnvironment("QA"))
+{
+    builder.Services.AddSingleton<ICategoryRepository, CategoriesInMemoryRepository>();
+    builder.Services.AddSingleton<IProductRepository, ProductsInMemoryRepository>();
+    builder.Services.AddSingleton<ITransactionRepository, TransactionsInMemoryRepository>();
+}
+else
+{
+    builder.Services.AddTransient<ICategoryRepository, CategorySQLRepository>();
+    builder.Services.AddTransient<IProductRepository, ProductSQLRepository>();
+    builder.Services.AddTransient<ITransactionRepository, TransactionSQLRepository>();
+}
+
+
 
 
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
