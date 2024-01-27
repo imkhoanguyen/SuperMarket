@@ -8,6 +8,8 @@ using UseCases.Interfaces;
 using UseCases.ProductsUseCases;
 using UseCases.TransactionUseCase;
 using Plugins.Datastore_SQL;
+using Microsoft.AspNetCore.Identity;
+using SuperMarket.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,8 @@ builder.Services.AddDbContext<MakeContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MarketManagement"));
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AccountContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
