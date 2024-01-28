@@ -10,7 +10,7 @@ namespace Plugins.Datastore.SQL
 {
     public class MakeContext : DbContext
     {
-        public MakeContext(DbContextOptions options) : base(options)
+        public MakeContext(DbContextOptions<MakeContext> options) : base(options)
         {
 
         }
