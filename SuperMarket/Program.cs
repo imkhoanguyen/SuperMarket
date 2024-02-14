@@ -25,6 +25,7 @@ builder.Services.AddDbContext<MakeContext>(options =>
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AccountContext>();
 
+builder.Services.AddRazorPages();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -40,8 +41,6 @@ else
     builder.Services.AddTransient<IProductRepository, ProductSQLRepository>();
     builder.Services.AddTransient<ITransactionRepository, TransactionSQLRepository>();
 }
-
-
 
 
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
@@ -77,7 +76,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

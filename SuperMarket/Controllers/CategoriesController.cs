@@ -1,9 +1,11 @@
 ﻿using CoreBusiness;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UseCases.Interfaces;
 
 namespace SuperMarket.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly IViewCategoriesUseCase viewCategoriesUseCase;
